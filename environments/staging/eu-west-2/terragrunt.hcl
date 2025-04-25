@@ -4,7 +4,7 @@ terraform {
 }
 
 locals {
-  environment = "Staging"
+  environment = "staging"
 }
 
 include {
