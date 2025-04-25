@@ -1,5 +1,5 @@
 locals {
-  project_name = "terraform-aws-template"
+  project_name = "devops-engineer"
   aws_region   = "eu-west-2"
   # Could use `find_in_parent_folders()` if file was in the parent directory.
   account     = read_terragrunt_config("account.hcl")
@@ -20,6 +20,11 @@ generate "provider" {
 provider "aws" {
   region              = "${local.aws_region}"
   allowed_account_ids = ["${local.account_id}"]
+  default_tags {
+    tags = {
+      Pathway = "DOP-C02"
+    }
+  }
 }
 EOF
 }
