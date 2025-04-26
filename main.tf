@@ -19,7 +19,19 @@ resource "aws_codestarconnections_connection" "github_kwame_mintah" {
   name          = substr("${local.name_prefix}-github", 0, 32)
   provider_type = "GitHub"
 
-  tags = {
-    "Repository" = "https://github.com/kwame-mintah"
-  }
+  tags = merge(
+    var.tags,
+    {
+      "Repository" = "https://github.com/kwame-mintah"
+    }
+  )
+}
+
+module "codepipeline_iam_role" {
+  source                             = "./modules/codepipeline-iam-role"
+  codestarconnections_connection_arn = aws_codestarconnections_connection.github_kwame_mintah.arn
+
+  tags = merge(
+    var.tags
+  )
 }

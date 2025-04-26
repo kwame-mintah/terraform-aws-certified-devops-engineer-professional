@@ -38,3 +38,13 @@ EOF
 
   type = string
 }
+
+variable "tags" {
+  description = <<-EOF
+    Tags to be added to resources created.
+    
+EOF
+
+  type    = map(string)
+  default = {}
+}
