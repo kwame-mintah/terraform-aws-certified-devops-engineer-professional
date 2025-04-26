@@ -30,6 +30,18 @@ resource "aws_codestarconnections_connection" "github_kwame_mintah" {
 module "codepipeline_iam_role" {
   source                             = "./modules/codepipeline-iam-role"
   codestarconnections_connection_arn = aws_codestarconnections_connection.github_kwame_mintah.arn
+  ecr_repository_arn                 = ["*", module.lambda_data_preprocessing_ecr.ecr_repository_arn]
+  s3_bucket_arn                      = ["${module.codepipeline_artifact_store.s3_bucket_arn}/*", module.codepipeline_artifact_store.s3_bucket_arn]
+
+  tags = merge(
+    var.tags
+  )
+}
+
+module "codepipeline_artifact_store" {
+  source                 = "./modules/s3"
+  name                   = substr("${local.name_prefix}-codepipeline-store", 0, 63)
+  principles_identifiers = [module.codepipeline_iam_role.codepipeline_iam_role_arn]
 
   tags = merge(
     var.tags
