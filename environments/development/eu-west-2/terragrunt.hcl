@@ -13,7 +13,7 @@ include {
 
 # These are inputs that need to be passed for the terragrunt configuration
 inputs = {
-  env_prefix                      = "dev"
+  env_prefix = "dev"
   tags = {
     Terraform   = "true"
     Environment = "${local.environment}"

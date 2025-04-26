@@ -57,7 +57,7 @@ remote_state {
 # There will be automatically merged into the child `terragrunt.hcl` using `include {}` block.
 #-------------------------------------------------------------------------------------------
 inputs = {
-  aws_region   = "${local.aws_region}"
-  allowed_account_ids   = ["${local.account_id}"]
-  project_name = "${local.project_name}"
+  aws_region          = "${local.aws_region}"
+  allowed_account_ids = ["${local.account_id}"]
+  project_name        = "${local.project_name}"
 }
