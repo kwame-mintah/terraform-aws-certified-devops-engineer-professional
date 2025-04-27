@@ -28,12 +28,16 @@ resource "aws_codestarconnections_connection" "github_kwame_mintah" {
 }
 
 module "codebuild_python_pytest" {
-  source                      = "./modules/codebuild"
-  name                        = "${local.name_prefix}-pytest-codebuild"
-  service_role_arn            = module.codepipeline_iam_role.codepipeline_iam_role_arn
-  codepipeline_name           = aws_codepipeline.lambda_codepipeline.name
-  principles_identifiers      = [module.codepipeline_iam_role.codepipeline_iam_role_arn]
-  buildspec_yml_file_location = "./templates/buildspecs/buildspec_python_pytest.yml"
+  source                             = "./modules/codebuild"
+  name                               = "${local.name_prefix}-pytest-codebuild"
+  service_role_arn                   = module.codepipeline_iam_role.codepipeline_iam_role_arn
+  codepipeline_name                  = aws_codepipeline.lambda_codepipeline.name
+  principles_identifiers             = [module.codepipeline_iam_role.codepipeline_iam_role_arn]
+  buildspec_yml_file_location        = "./templates/buildspecs/buildspec_python_pytest.yml"
+  create_codebuild_test_report_group = true
+  codebuild_report_group_name        = "${local.name_prefix}-pytest-codebuild-pytest_reports"
+  s3_report_bucket_name              = module.codepipeline_artifact_store.s3_bucket
+  s3_report_encryption_key_arn       = module.codepipeline_artifact_store.s3_bucket_kms_key_arn
 
   tags = merge(
     var.tags
