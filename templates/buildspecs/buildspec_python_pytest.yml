@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.12
+    commands:
+      - pip3 install -r requirements.txt
+  build:
+    commands:
+      - python -m pytest --junitxml=pytest-reports/test
+
+reports:
+  pytest_reports:
+    files:
+      - test
+    base-directory: pytest-reports
+    file-format: JUNITXML

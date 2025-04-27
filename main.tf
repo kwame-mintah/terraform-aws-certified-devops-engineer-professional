@@ -27,6 +27,19 @@ resource "aws_codestarconnections_connection" "github_kwame_mintah" {
   )
 }
 
+module "codebuild_python_pytest" {
+  source                      = "./modules/codebuild"
+  name                        = "${local.name_prefix}-pytest-codebuild"
+  service_role_arn            = module.codepipeline_iam_role.codepipeline_iam_role_arn
+  codepipeline_name           = aws_codepipeline.lambda_codepipeline.name
+  principles_identifiers      = [module.codepipeline_iam_role.codepipeline_iam_role_arn]
+  buildspec_yml_file_location = "./templates/buildspecs/buildspec_python_pytest.yml"
+
+  tags = merge(
+    var.tags
+  )
+}
+
 module "codepipeline_iam_role" {
   source                             = "./modules/codepipeline-iam-role"
   codestarconnections_connection_arn = aws_codestarconnections_connection.github_kwame_mintah.arn
