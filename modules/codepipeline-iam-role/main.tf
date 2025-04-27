@@ -147,7 +147,10 @@ data "aws_iam_policy_document" "codepipeline_policies" {
       "codebuild:CreateReportGroup",
       "codebuild:UpdateReport"
     ]
-    resources = ["arn:aws:codebuild:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:project/*"]
+    resources = [
+      "arn:aws:codebuild:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:project/*",
+      "arn:aws:codebuild:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:report-group/*"
+    ]
   }
 }
 
