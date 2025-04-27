@@ -45,6 +45,34 @@ resource "aws_codebuild_project" "codebuild_project" {
 }
 
 #---------------------------------------------------
+# CodeBuild Test Report Group(s)
+#---------------------------------------------------
+resource "aws_codebuild_report_group" "codebuild_test_report_group" {
+  count = var.create_codebuild_test_report_group ? 1 : 0
+  # name = "${var.name}-${regex("buildspec_(.*)\\..*", var.buildspec_yml_file_location)[0]}_reports"
+  # Naming can be automatically generated or you can determine how it will be named.
+  # https://docs.aws.amazon.com/codebuild/latest/userguide/test-report-group-naming.html
+  name = var.codebuild_report_group_name
+  type = "TEST"
+
+  export_config {
+    type = "S3"
+
+    s3_destination {
+      bucket              = var.s3_report_bucket_name
+      encryption_disabled = false
+      encryption_key      = var.s3_report_encryption_key_arn
+      packaging           = "NONE"
+      path                = "/"
+    }
+  }
+
+  tags = merge(
+    local.common_tags,
+  )
+}
+
+#---------------------------------------------------
 # Key Management Service
 #---------------------------------------------------
 

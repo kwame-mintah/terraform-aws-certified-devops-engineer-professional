@@ -28,6 +28,17 @@ EOF
   type = string
 }
 
+variable "create_codebuild_test_report_group" {
+  description = <<-EOF
+    Create a CodeBuild test report project group, associated with the
+    buildspec provided.
+    
+EOF
+
+  type    = bool
+  default = false
+}
+
 variable "environment_compute_type" {
   description = <<-EOF
      Information about the compute resources the build project will use. 
@@ -68,6 +79,29 @@ EOF
   type = string
 }
 
+variable "s3_report_bucket_name" {
+  description = <<-EOF
+    The name of the S3 bucket where the raw data of
+    a report are exported.
+
+EOF
+
+  type    = string
+  default = ""
+}
+
+variable "s3_report_encryption_key_arn" {
+  description = <<-EOF
+    The KMS key used to encrypt data stored within
+    the report bucket.
+
+EOF
+
+  type    = string
+  default = ""
+}
+
+
 variable "service_role_arn" {
   description = <<-EOF
     Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
@@ -87,6 +121,16 @@ EOF
 
   type    = map(string)
   default = {}
+}
+
+variable "codebuild_report_group_name" {
+  description = <<-EOF
+    The name of a Report Group.
+
+EOF
+
+  type    = string
+  default = ""
 }
 
 variable "principles_identifiers" {
