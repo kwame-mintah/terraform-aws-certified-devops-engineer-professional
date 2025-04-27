@@ -33,14 +33,35 @@ resource "aws_codepipeline" "lambda_codepipeline" {
         ConnectionArn        = aws_codestarconnections_connection.github_kwame_mintah.arn
         FullRepositoryId     = "kwame-mintah/aws-lambda-data-preprocessing"
         BranchName           = "main"
-        DetectChanges        = "true"
         OutputArtifactFormat = "CODE_ZIP"
+        DetectChanges        = "true"
       }
     }
   }
 
   stage {
-    name = "ECR"
+    name = "Test"
+
+    action {
+      name            = "Run_Python_Pytest_Unit_Tests"
+      category        = "Test"
+      owner           = "AWS"
+      provider        = "CodeBuild"
+      version         = "1"
+      input_artifacts = ["source_output"]
+
+      configuration = {
+        # AWS CodeBuild build and test action reference
+        # https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodeBuild.html
+        ProjectName      = "${local.name_prefix}-pytest-codebuild" # Unable to reference module due to circular dependency
+        BatchEnabled     = "false"
+        CombineArtifacts = "false"
+      }
+    }
+  }
+
+  stage {
+    name = "Registry"
 
     # ECRBuildAndPublish build action reference
     # https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-ECRBuildAndPublish.html
