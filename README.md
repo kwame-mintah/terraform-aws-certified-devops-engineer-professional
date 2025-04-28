@@ -1,6 +1,22 @@
-# Terraform AWS Template
+# Terraform AWS Certified DevOps Engineer Professional
 
-The main purpose of this repository is to create a template for [Terraform](https://www.terraform.io/). This project will focus on the [AWS](https://registry.terraform.io/providers/hashicorp/aws/latest) provider.
+The main purpose of this repository is to create resources that are mentioned within [AWS Certified DevOps Engineer - Professional](https://aws.amazon.com/certification/certified-devops-engineer-professional/) exam. The idea is to create an example architecture to showcase
+provisioning, operating, and managing distributed application systems on AWS.
+
+## Proposed architecture
+
+Below is a high level overview detailing the services that will be created within this project, the necessary configuration will be done
+in Terraform were possible. Or utilise other tools like [AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html), [Serverless](https://www.serverless.com/) to 
+provision resources within your AWS account. To speed up deploying services [some of my existing repositories](https://github.com/kwame-mintah?tab=repositories&q=aws&type=&language=&sort=) will be re-used.
+
+![Proposed architecture for project](./diagrams/proposed_aws_devops_engineer_architecture.png)
+
+The diagram shows the following workflow:
+
+1. In the source stage, AWS CodePipeline will use a AWS CodeConnections connection (*formerly known as AWS CodeStar Connections*) configured with an external git repository to download the source code.
+2. Next in the build and publish stage, AWS CodeBuild will run unit tests found in the source code, using the specified [Buildspec](https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) and report the coverage back to CodeBuild Report groups. Within this stage, it will also build a Docker image using the `Dockerfile` found in the repository.
+3. The built Docker image will be pushed to AWS Elastic Container Registry (ECR) to be referenced later for deployment.
+4. Finally a CloudFormation template will be used to deploy the necessary resources and reference docker images available in ECR to deploy various services.
 
 ## Development
 
@@ -27,7 +43,7 @@ and [project status](https://github.com/opentofu/opentofu/blob/main/WEEKLY_UPDAT
 1. Navigate to the environment you would like to deploy,
 2. Initialize the configuration with:
    ```bash
-   aws-vault exec <profile> --no-session terragrunt init
+   aws-vault exec <profile> --no-session terragrunt init --backend-bootstrap
    ```
 3. Plan your changes with:
    ```bash
