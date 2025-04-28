@@ -1,3 +1,5 @@
+# Buildspec syntax
+# https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html
 version: 0.2
 
 phases:
@@ -8,11 +10,11 @@ phases:
       - pip3 install -r requirements.txt
   build:
     commands:
-      - python -m pytest --junitxml=pytest-reports/test
+      - python -m pytest --junitxml=pytest-reports/test.xml
 
 reports:
   pytest_reports:
     files:
-      - test
+      - test.xml
     base-directory: pytest-reports
     file-format: JUNITXML
