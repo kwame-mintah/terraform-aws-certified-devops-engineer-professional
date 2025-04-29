@@ -1,5 +1,9 @@
-resource "aws_codepipeline" "lambda_codepipeline" {
-  name          = "${local.name_prefix}-lambda-pipeline"
+#---------------------------------------------------
+# Python Build and Deploy Pipeline
+#---------------------------------------------------
+
+resource "aws_codepipeline" "python_codepipeline" {
+  name          = "${local.name_prefix}-python-codepipeline"
   pipeline_type = "V2"
   role_arn      = module.codepipeline_iam_role.codepipeline_iam_role_arn
 
@@ -26,6 +30,9 @@ resource "aws_codepipeline" "lambda_codepipeline" {
       provider         = "CodeStarSourceConnection"
       version          = "1"
       output_artifacts = ["source_output"]
+      # Action output variables
+      # https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-variables.html#reference-variables-output-CodeConnections
+      namespace = "SourceVariables"
 
       configuration = {
         # CodeStarSourceConnection for GitHub
@@ -33,7 +40,7 @@ resource "aws_codepipeline" "lambda_codepipeline" {
         ConnectionArn        = aws_codestarconnections_connection.github_kwame_mintah.arn
         FullRepositoryId     = "kwame-mintah/aws-lambda-data-preprocessing"
         BranchName           = "main"
-        OutputArtifactFormat = "CODE_ZIP"
+        OutputArtifactFormat = "CODE_ZIP" # CODEBUILD_CLONE_REF
         DetectChanges        = "true"
       }
     }
@@ -78,8 +85,7 @@ resource "aws_codepipeline" "lambda_codepipeline" {
       configuration = {
         ECRRepositoryName = module.lambda_data_preprocessing_ecr.ecr_repository_name
         DockerFilePath    = "."
-        ImageTags         = "latest"
-        RegistryType      = "private"
+        ImageTags         = "#{SourceVariables.CommitId}"
       }
     }
   }
