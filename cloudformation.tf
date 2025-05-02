@@ -5,7 +5,7 @@ data "http" "km_dynamodb_template" {
   request_headers = {
     Accept = "text/yaml"
   }
-  url = "https://raw.githubusercontent.com/kwame-mintah/aws-cloudformation-playground/refs/heads/main/dynamodb-terraform-deployment-template.yaml"
+  url = "https://raw.githubusercontent.com/kwame-mintah/aws-cloudformation-playground/e81092ed4e6b27d887ef2dbb489bb8efa59a44f4/dynamodb-terraform-deployment-template.yaml"
 }
 
 resource "aws_cloudformation_stack" "dynamodb_table_stack" {
