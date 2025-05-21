@@ -47,7 +47,7 @@ module "codebuild_python_pytest" {
 module "codepipeline_iam_role" {
   source                             = "./modules/codepipeline-iam-role"
   codestarconnections_connection_arn = aws_codestarconnections_connection.github_kwame_mintah.arn
-  ecr_repository_arn                 = ["*", module.lambda_data_preprocessing_ecr.ecr_repository_arn]
+  ecr_repository_arn                 = ["*", module.aws_fastapi_lambda_api_gateway_ecr.ecr_repository_arn]
   s3_bucket_arn                      = ["${module.codepipeline_artifact_store.s3_bucket_arn}/*", module.codepipeline_artifact_store.s3_bucket_arn]
 
   tags = merge(

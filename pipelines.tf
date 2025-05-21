@@ -38,7 +38,7 @@ resource "aws_codepipeline" "python_codepipeline" {
         # CodeStarSourceConnection for GitHub
         # https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CodestarConnectionSource.html#action-reference-CodestarConnectionSource-config
         ConnectionArn        = aws_codestarconnections_connection.github_kwame_mintah.arn
-        FullRepositoryId     = "kwame-mintah/aws-lambda-data-preprocessing"
+        FullRepositoryId     = "kwame-mintah/aws-fastapi-lambda-api-gateway"
         BranchName           = "main"
         OutputArtifactFormat = "CODE_ZIP" # CODEBUILD_CLONE_REF
         DetectChanges        = "true"
@@ -83,7 +83,7 @@ resource "aws_codepipeline" "python_codepipeline" {
       input_artifacts = ["source_output"]
 
       configuration = {
-        ECRRepositoryName = module.lambda_data_preprocessing_ecr.ecr_repository_name
+        ECRRepositoryName = module.aws_fastapi_lambda_api_gateway_ecr.ecr_repository_name
         DockerFilePath    = "."
         ImageTags         = "#{SourceVariables.CommitId}"
       }
@@ -94,5 +94,5 @@ resource "aws_codepipeline" "python_codepipeline" {
     var.tags
   )
 
-  depends_on = [module.lambda_data_preprocessing_ecr, module.codepipeline_artifact_store, module.codepipeline_iam_role]
+  depends_on = [module.aws_fastapi_lambda_api_gateway_ecr, module.codepipeline_artifact_store, module.codepipeline_iam_role]
 }

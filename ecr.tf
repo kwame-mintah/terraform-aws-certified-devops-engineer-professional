@@ -2,15 +2,15 @@
 # A shared location can be used and access given for each account to perform
 # necessary actions.
 
-module "lambda_data_preprocessing_ecr" {
+module "aws_fastapi_lambda_api_gateway_ecr" {
   source                 = "./modules/ecr"
-  repository_name        = "${var.project_name}-data-preprocessing"
+  repository_name        = "${var.project_name}-aws-fastapi-lambda-api-gateway"
   principles_identifiers = [module.codepipeline_iam_role.codepipeline_iam_role_arn]
 
   tags = merge(
     var.tags,
     {
-      image_source = "https://github.com/kwame-mintah/aws-lambda-data-preprocessing"
+      image_source = "https://github.com/kwame-mintah/aws-fastapi-lambda-api-gateway"
     }
   )
 }
