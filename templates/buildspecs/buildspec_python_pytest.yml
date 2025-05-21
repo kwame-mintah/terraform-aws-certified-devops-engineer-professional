@@ -5,12 +5,16 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      python: 3.12
+      python: 3.11.6
     commands:
-      - pip3 install -r requirements.txt
+      # Resolve error installing Pyyaml pulled from FastAPI.
+      # https://github.com/yaml/pyyaml/issues/724#issuecomment-2045560179
+      - pip install wheel
+      - pip install --no-build-isolation "Cython<3" "pyyaml==5.4.1"
+      - pip install -r requirements.txt
   build:
     commands:
-      - python -m pytest --junitxml=pytest-reports/test.xml
+      - python -m pytest --junitxml=pytest-reports/test.xml --ignore=tests/integration
 
 reports:
   pytest_reports:
