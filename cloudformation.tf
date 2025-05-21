@@ -36,7 +36,7 @@ resource "aws_cloudformation_stack" "lambda_api_gateway_stack" {
   capabilities       = ["CAPABILITY_AUTO_EXPAND", "CAPABILITY_IAM"]
 
   parameters = {
-    DockerImageUri    = "827284457226.dkr.ecr.eu-west-2.amazonaws.com/devops-engineer-data-preprocessing:fdb984aff9953708f67ef098841d25ab1b7197cf"
+    DockerImageUri    = "827284457226.dkr.ecr.eu-west-2.amazonaws.com/devops-engineer-aws-fastapi-lambda-api-gateway:f49c964c3acf36c2339a2cbfde78c77aa0420c2a"
     FunctionName      = "${local.name_prefix}-fastapi-dynamodb-crud"
     DynamoDBTableName = aws_cloudformation_stack.dynamodb_table_stack.outputs["TableName"]
   }
