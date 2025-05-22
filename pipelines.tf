@@ -90,6 +90,33 @@ resource "aws_codepipeline" "python_codepipeline" {
     }
   }
 
+  stage {
+    name = "CloudFormation"
+
+    # CloudFormation build action reference
+    # https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CloudFormation.html
+    action {
+      name            = "Deploy_CloudFormation_Stack"
+      category        = "Deploy"
+      owner           = "AWS"
+      provider        = "CloudFormation"
+      version         = "1"
+      input_artifacts = ["source_output"]
+
+      configuration = {
+        ActionMode   = "CREATE_UPDATE"
+        StackName    = "${local.name_prefix}-lambda-api-gateway-stack-t"
+        TemplatePath = "https://raw.githubusercontent.com/kwame-mintah/aws-cloudformation-playground/301746222955e9bf2f1c74c8177a51ba9b722c0d/lambda-api-gateway-deployment-template.yaml"
+        Capabilities = "CAPABILITY_AUTO_EXPAND,CAPABILITY_IAM"
+        ParameterOverrides = jsonencode({
+          "DockerImageUri" : "${module.aws_fastapi_lambda_api_gateway_ecr.ecr_repository_url}:#{SourceVariables.CommitId}",
+          "FunctionName" : "${local.name_prefix}-fastapi-dynamodb-crud-t",
+          "DynamoDBTableName" : aws_cloudformation_stack.dynamodb_table_stack.outputs["TableName"]
+        })
+      }
+    }
+  }
+
   tags = merge(
     var.tags
   )

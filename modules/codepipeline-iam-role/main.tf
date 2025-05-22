@@ -152,12 +152,35 @@ data "aws_iam_policy_document" "codepipeline_policies" {
       "arn:aws:codebuild:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:report-group/*"
     ]
   }
+
+  statement {
+    sid    = "AllowCFNStackAccess"
+    effect = "Allow"
+    actions = [
+      "cloudformation:CreateChangeSet",
+      "cloudformation:CreateStack",
+      "cloudformation:DeleteChangeSet",
+      "cloudformation:DeleteStack",
+      "cloudformation:DescribeChangeSet",
+      "cloudformation:DescribeStackEvents",
+      "cloudformation:DescribeStackResources",
+      "cloudformation:DescribeStacks",
+      "cloudformation:ExecuteChangeSet",
+      "cloudformation:GetTemplate",
+      "cloudformation:UpdateStack",
+      "cloudformation:ValidateTemplate"
+    ]
+    resources = [
+      "arn:aws:cloudformation:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:stack/*",
+    ]
+  }
 }
 
 data "aws_iam_policy_document" "s3_allow_action_policy_document" {
   count = local.create_inline_s3_policy ? 1 : 0
   statement {
-    sid = "S3AllowActions"
+    sid    = "S3AllowActions"
+    effect = "Allow"
     actions = [
       "s3:DeleteObject",
       "s3:DeleteObjectVersion",
@@ -166,7 +189,6 @@ data "aws_iam_policy_document" "s3_allow_action_policy_document" {
       "s3:ListBucketVersions",
       "s3:ListBucket"
     ]
-    effect    = "Allow"
     resources = var.s3_bucket_arn
   }
 }
@@ -174,7 +196,8 @@ data "aws_iam_policy_document" "s3_allow_action_policy_document" {
 data "aws_iam_policy_document" "ecr_allow_action_policy_document" {
   count = local.create_inline_ecr_policy ? 1 : 0
   statement {
-    sid = "ECRBuildAndPublishPolicy"
+    sid    = "ECRBuildAndPublishPolicy"
+    effect = "Allow"
     actions = [
       "ecr:BatchCheckLayerAvailability",
       "ecr:BatchGetImage",
@@ -187,7 +210,6 @@ data "aws_iam_policy_document" "ecr_allow_action_policy_document" {
       "ecr:PutImage",
       "ecr:UploadLayerPart"
     ]
-    effect    = "Allow"
     resources = var.ecr_repository_arn
   }
   #checkov:skip=CKV_AWS_356:this is the minimum permissions needed to login and push
