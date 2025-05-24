@@ -5,8 +5,9 @@ locals {
   common_tags = merge(
     var.tags
   )
-  create_inline_s3_policy  = (length(var.s3_bucket_arn) > 0)
-  create_inline_ecr_policy = (length(var.ecr_repository_arn) > 0)
+  create_inline_s3_policy                           = (length(var.s3_bucket_arn) > 0)
+  create_inline_ecr_policy                          = (length(var.ecr_repository_arn) > 0)
+  create_inline_cloudformation_pass_iam_role_policy = (length(var.cloudformation_iam_role_arn) > 0)
 }
 
 data "aws_caller_identity" "current_caller_identity" {}
@@ -48,6 +49,12 @@ resource "aws_iam_role_policy_attachment" "codepipeline_policy_attachment_ecr" {
   policy_arn = aws_iam_policy.codepipeline_allow_ecr[0].arn
 }
 
+resource "aws_iam_role_policy_attachment" "codepipeline_policy_attachment_cloudformation_iam_pass_role" {
+  count      = local.create_inline_cloudformation_pass_iam_role_policy ? 1 : 0
+  role       = aws_iam_role.codepipeline_role.name
+  policy_arn = aws_iam_policy.codepipeline_allow_cloudformation_pass_iam_role[0].arn
+}
+
 
 #---------------------------------------------------
 # IAM Policies
@@ -77,6 +84,16 @@ resource "aws_iam_policy" "codepipeline_allow_s3" {
   count  = local.create_inline_s3_policy ? 1 : 0
   name   = "CodePipelineAllowS3Access"
   policy = data.aws_iam_policy_document.s3_allow_action_policy_document[0].json
+
+  tags = merge(
+    local.common_tags,
+  )
+}
+
+resource "aws_iam_policy" "codepipeline_allow_cloudformation_pass_iam_role" {
+  count  = local.create_inline_cloudformation_pass_iam_role_policy ? 1 : 0
+  name   = "CodePipelineCloudFormationPassIAMRole"
+  policy = data.aws_iam_policy_document.cloudformation_pass_role_policy_document[0].json
 
   tags = merge(
     local.common_tags,
@@ -130,11 +147,15 @@ data "aws_iam_policy_document" "codepipeline_policies" {
     sid    = "CodePipelineDefaultPolicy"
     effect = "Allow"
     actions = [
+      "codepipeline:StartPipelineExecution",
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = ["arn:${data.aws_partition.current_partition.partition}:logs:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:log-group:*"]
+    resources = [
+      "arn:${data.aws_partition.current_partition.partition}:logs:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:log-group:*",
+      "arn:aws:codepipeline:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:*"
+    ]
   }
 
   statement {
@@ -145,7 +166,7 @@ data "aws_iam_policy_document" "codepipeline_policies" {
       "codebuild:BatchPutTestCases",
       "codebuild:CreateReport",
       "codebuild:CreateReportGroup",
-      "codebuild:UpdateReport"
+      "codebuild:UpdateReport",
     ]
     resources = [
       "arn:aws:codebuild:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:project/*",
@@ -153,6 +174,8 @@ data "aws_iam_policy_document" "codepipeline_policies" {
     ]
   }
 
+  # Service role permissions: AWS CloudFormation action
+  # https://docs.aws.amazon.com/codepipeline/latest/userguide/action-reference-CloudFormation.html#edit-role-cloudformation
   statement {
     sid    = "AllowCFNStackAccess"
     effect = "Allow"
@@ -213,4 +236,19 @@ data "aws_iam_policy_document" "ecr_allow_action_policy_document" {
     resources = var.ecr_repository_arn
   }
   #checkov:skip=CKV_AWS_356:this is the minimum permissions needed to login and push
+}
+
+data "aws_iam_policy_document" "cloudformation_pass_role_policy_document" {
+  count = local.create_inline_cloudformation_pass_iam_role_policy ? 1 : 0
+  statement {
+    sid       = "CloudFormationAllowIAMPassPolicy"
+    effect    = "Allow"
+    actions   = ["iam:PassRole"]
+    resources = var.cloudformation_iam_role_arn
+    condition {
+      test     = "StringEqualsIfExists"
+      values   = ["cloudformation.amazonaws.com"]
+      variable = "iam:PassedToService"
+    }
+  }
 }

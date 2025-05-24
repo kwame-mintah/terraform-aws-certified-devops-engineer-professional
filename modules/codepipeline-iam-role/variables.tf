@@ -7,6 +7,16 @@ EOF
   type = string
 }
 
+variable "cloudformation_iam_role_arn" {
+  description = <<-EOF
+    The CloudFormation (CFN) that the CodePipeline can assume.
+    
+EOF
+
+  type    = list(string)
+  default = []
+}
+
 variable "ecr_repository_arn" {
   description = <<-EOF
     The Elastic Container Registry (ECR) that the IAM role will be uploading docker images to.
