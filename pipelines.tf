@@ -110,7 +110,7 @@ resource "aws_codepipeline" "python_codepipeline" {
           },
           {
             name  = "StackName"
-            value = "devops-engineer-lambda-api-gateway-stack"
+            value = "${var.project_name}-lambda-api-gateway-stack"
           },
           {
             name  = "TemplatePath"
@@ -185,14 +185,13 @@ resource "aws_codepipeline" "cloudformation_template_codepipeline" {
     name = "Source"
 
     action {
-      name               = "Pull_GitHub_Repository"
-      category           = "Source"
-      owner              = "AWS"
-      provider           = "CodeStarSourceConnection"
-      version            = "1"
-      output_artifacts   = ["source_output"]
-      namespace          = "SourceVariables"
-      timeout_in_minutes = 5
+      name             = "Pull_GitHub_Repository"
+      category         = "Source"
+      owner            = "AWS"
+      provider         = "CodeStarSourceConnection"
+      version          = "1"
+      output_artifacts = ["source_output"]
+      namespace        = "SourceVariables"
 
       configuration = {
         ConnectionArn        = aws_codestarconnections_connection.github_kwame_mintah.arn
