@@ -49,6 +49,7 @@ module "codepipeline_iam_role" {
   codestarconnections_connection_arn = aws_codestarconnections_connection.github_kwame_mintah.arn
   ecr_repository_arn                 = ["*", module.aws_fastapi_lambda_api_gateway_ecr.ecr_repository_arn]
   s3_bucket_arn                      = ["${module.codepipeline_artifact_store.s3_bucket_arn}/*", module.codepipeline_artifact_store.s3_bucket_arn]
+  cloudformation_iam_role_arn        = [aws_iam_role.cloudformation_provider_role.arn]
 
   tags = merge(
     var.tags

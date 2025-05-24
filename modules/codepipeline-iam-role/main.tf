@@ -238,6 +238,7 @@ data "aws_iam_policy_document" "ecr_allow_action_policy_document" {
   #checkov:skip=CKV_AWS_356:this is the minimum permissions needed to login and push
 }
 
+#trivy:ignore:AVD-AWS-0342
 data "aws_iam_policy_document" "cloudformation_pass_role_policy_document" {
   count = local.create_inline_cloudformation_pass_iam_role_policy ? 1 : 0
   statement {
