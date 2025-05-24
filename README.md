@@ -73,33 +73,47 @@ Additionally, once installed, the hooks can be updated to the latest available v
 
 Code formatting and documentation for `variables` and `outputs` is generated using [pre-commit-terraform](https://github.com/antonbabenko/pre-commit-terraform/releases) hooks that in turn uses [terraform-docs](https://github.com/terraform-docs/terraform-docs) that will insert/update documentation. The following markers have been added to the `README.md`:
 ```
-<!-- {BEGINNING|END} OF PRE-COMMIT-TERRAFORM DOCS HOOK --->
+<!-- {BEGINNING|END}_TF_DOCS --->
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK --->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0, <= 1.5.7 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.17.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.95.0 |
+| <a name="requirement_http"></a> [http](#requirement\_http) | ~> 3.5.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.17.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.95.0 |
+| <a name="provider_http"></a> [http](#provider\_http) | 3.5.0 |
 
 ## Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_aws_fastapi_lambda_api_gateway_ecr"></a> [aws\_fastapi\_lambda\_api\_gateway\_ecr](#module\_aws\_fastapi\_lambda\_api\_gateway\_ecr) | ./modules/ecr | n/a |
+| <a name="module_codebuild_python_pytest"></a> [codebuild\_python\_pytest](#module\_codebuild\_python\_pytest) | ./modules/codebuild | n/a |
+| <a name="module_codepipeline_artifact_store"></a> [codepipeline\_artifact\_store](#module\_codepipeline\_artifact\_store) | ./modules/s3 | n/a |
+| <a name="module_codepipeline_iam_role"></a> [codepipeline\_iam\_role](#module\_codepipeline\_iam\_role) | ./modules/codepipeline-iam-role | n/a |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aws_availability_zones.avaliabile_zones](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
+| [aws_cloudformation_stack.dynamodb_table_stack](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudformation_stack) | resource |
+| [aws_codepipeline.cloudformation_template_codepipeline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codepipeline) | resource |
+| [aws_codepipeline.python_codepipeline](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codepipeline) | resource |
+| [aws_codestarconnections_connection.github_kwame_mintah](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/codestarconnections_connection) | resource |
+| [aws_iam_role.cloudformation_provider_role](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy.cloudformation_provider_policy](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role_policy) | resource |
+| [aws_availability_zones.available_zones](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/availability_zones) | data source |
 | [aws_caller_identity.current_caller_identity](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
+| [http_http.km_dynamodb_template](https://registry.terraform.io/providers/hashicorp/http/latest/docs/data-sources/http) | data source |
 
 ## Inputs
 
@@ -107,6 +121,9 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_allowed_account_ids"></a> [allowed\_account\_ids](#input\_allowed\_account\_ids) | List of allowed AWS account IDs to prevent you<br>from mistakenly using an incorrect one. | `list(string)` | n/a | yes |
 | <a name="input_aws_region"></a> [aws\_region](#input\_aws\_region) | The AWS region. | `string` | n/a | yes |
+| <a name="input_env_prefix"></a> [env\_prefix](#input\_env\_prefix) | The prefix added to resources in the environment. | `string` | n/a | yes |
+| <a name="input_project_name"></a> [project\_name](#input\_project\_name) | The name of the project. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags to be added to resources created. | `map(string)` | `{}` | no |
 
 ## Outputs
 
@@ -114,4 +131,4 @@ No modules.
 |------|-------------|
 | <a name="output_availability_zones"></a> [availability\_zones](#output\_availability\_zones) | List of the Availability Zone names available to the account. |
 | <a name="output_current_caller_identity"></a> [current\_caller\_identity](#output\_current\_caller\_identity) | AWS Account ID number of the account that owns or contains the <br>calling entity. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK --->
+<!-- END_TF_DOCS -->
