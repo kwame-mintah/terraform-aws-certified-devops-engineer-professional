@@ -2,19 +2,19 @@
 
 A module to create ECR repositories
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK --->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.57.0 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.95.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.57.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.95.0 |
 
 ## Modules
 
@@ -45,5 +45,6 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_ecr_repository_arn"></a> [ecr\_repository\_arn](#output\_ecr\_repository\_arn) | Full ARN of the repository. |
+| <a name="output_ecr_repository_name"></a> [ecr\_repository\_name](#output\_ecr\_repository\_name) | The name of the repository. |
 | <a name="output_ecr_repository_url"></a> [ecr\_repository\_url](#output\_ecr\_repository\_url) | The URL of the repository. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK --->
+<!-- END_TF_DOCS -->

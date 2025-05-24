@@ -2,21 +2,21 @@
 
 This module creates an S3 bucket and related logging bucket. A KMS key is created for encryption.
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK --->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.5.4 |
-| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.57.0 |
-| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.5.1 |
+| <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 5.95.0 |
+| <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.7.2 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.57.0 |
-| <a name="provider_random"></a> [random](#provider\_random) | 3.5.1 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.95.0 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.7.2 |
 
 ## Modules
 
@@ -64,6 +64,8 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_s3_bucket"></a> [s3\_bucket](#output\_s3\_bucket) | The bucket. |
 | <a name="output_s3_bucket_arn"></a> [s3\_bucket\_arn](#output\_s3\_bucket\_arn) | ARN of the bucket. |
 | <a name="output_s3_bucket_id"></a> [s3\_bucket\_id](#output\_s3\_bucket\_id) | Name of the bucket. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK --->
+| <a name="output_s3_bucket_kms_key_arn"></a> [s3\_bucket\_kms\_key\_arn](#output\_s3\_bucket\_kms\_key\_arn) | The KMS key ARN. |
+<!-- END_TF_DOCS -->
