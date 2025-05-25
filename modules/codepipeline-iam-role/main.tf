@@ -144,18 +144,23 @@ data "aws_iam_policy_document" "codepipeline_policies" {
   }
 
   statement {
-    sid    = "CodePipelineDefaultPolicy"
+    sid    = "CodePipelineInvokeAction"
     effect = "Allow"
     actions = [
       "codepipeline:StartPipelineExecution",
+    ]
+    resources = ["arn:aws:codepipeline:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:*"]
+  }
+
+  statement {
+    sid    = "CodePipelineDefaultPolicy"
+    effect = "Allow"
+    actions = [
       "logs:CreateLogGroup",
       "logs:CreateLogStream",
       "logs:PutLogEvents"
     ]
-    resources = [
-      "arn:${data.aws_partition.current_partition.partition}:logs:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:log-group:*",
-      "arn:aws:codepipeline:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:*"
-    ]
+    resources = ["arn:${data.aws_partition.current_partition.partition}:logs:${data.aws_region.current_caller_region.name}:${data.aws_caller_identity.current_caller_identity.account_id}:log-group:*"]
   }
 
   statement {
