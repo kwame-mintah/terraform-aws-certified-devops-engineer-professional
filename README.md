@@ -18,6 +18,10 @@ The diagram shows the following workflow:
 3. The built Docker image will be pushed to AWS Elastic Container Registry (ECR) to be referenced later for deployment.
 4. Finally a CloudFormation template will be used to deploy the necessary resources and reference docker images available in ECR to deploy various services.
 
+> [!NOTE]
+> The way some resources are being deployed might be done *inefficiently*, purely for demonstration purposes e.g. using a [CloudFormation](cloudformation.tf#L11) template and
+> Terraform to deploy DynamoDB table. This can easily be changed and was done to show different ways of deploying AWS resources.
+
 ## Development
 
 ### Dependencies
