@@ -204,6 +204,22 @@ resource "aws_codepipeline" "cloudformation_template_codepipeline" {
   }
 
   stage {
+    name = "Approval"
+
+    # Manual approval action
+    # https://docs.aws.amazon.com/codepipeline/latest/userguide/approvals-action-add.html
+    action {
+      name     = "Deployment_Approval"
+      category = "Approval"
+      owner    = "AWS"
+      provider = "Manual"
+      version  = "1"
+
+      configuration = {}
+    }
+  }
+
+  stage {
     name = "CloudFormation"
 
     # CloudFormation build action reference
