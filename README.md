@@ -22,6 +22,15 @@ The diagram shows the following workflow:
 > The way some resources are being deployed might be done *inefficiently*, purely for demonstration purposes e.g. using a [CloudFormation](cloudformation.tf#L11) template and
 > Terraform to deploy DynamoDB table. This can easily be changed and was done to show different ways of deploying AWS resources.
 
+## Domains covered
+
+- [x] Domain 1: Software Development Lifecycle automation
+- [x] Domain 2: Configuration management and Infrastructure as Code 
+- [ ] Domain 3: Resilient Cloud Solutions
+- [x] Domain 4: Monitoring and Logging
+- [ ] Domain 5: Incident and Event Response
+- [ ] Domain 6: Security and Compliance
+
 ## Development
 
 ### Dependencies
@@ -62,6 +71,14 @@ and [project status](https://github.com/opentofu/opentofu/blob/main/WEEKLY_UPDAT
 >
 > Please note that terragrunt will create an S3 Bucket and DynamoDB table for storing the remote state. 
 > Ensure the account deploying the resources has the appropriate permissions to create or connect to these resources.
+
+## Teardown order
+
+Due to mixture of using both Terraform and CloudFormation for learning purposes, not all resources will be destroyed when attempting
+to  use Terraform destroy. Please follow the order below before attempting a `terragrunt destroy`.
+
+1. Delete the CloudFormation stack for (`devops-engineer-lambda-api-gateway-stack`),
+2. Empty S3 Bucket(s).
 
 ## Pre-Commit hooks
 
