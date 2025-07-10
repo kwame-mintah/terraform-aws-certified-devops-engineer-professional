@@ -83,6 +83,14 @@ resource "aws_iam_role_policy" "cloudformation_provider_policy" {
           "cloudformation:GetTemplate",
           "cloudformation:UpdateStack",
           "cloudformation:ValidateTemplate",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:BatchGetImage",
+          "ecr:DescribeImages",
+          "ecr:DescribeRepositories",
+          "ecr:GetAuthorizationToken",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:GetRepositoryPolicy",
+          "ecr:SetRepositoryPolicy",
           "iam:AttachRolePolicy",
           "iam:CreateRole",
           "iam:DeleteRole",
@@ -103,6 +111,7 @@ resource "aws_iam_role_policy" "cloudformation_provider_policy" {
         Effect = "Allow"
         Resource = [
           "arn:aws:cloudformation:*:aws:transform/Serverless-*",
+          "arn:aws:ecr:*:${data.aws_caller_identity.current_caller_identity.account_id}:repository/devops-engineer-*",
           "arn:aws:iam::${data.aws_caller_identity.current_caller_identity.account_id}:role/*",
           "arn:aws:lambda:*:${data.aws_caller_identity.current_caller_identity.account_id}:function:*",
           "arn:aws:cloudformation:*:${data.aws_caller_identity.current_caller_identity.account_id}:stack/*",
