@@ -131,7 +131,17 @@ resource "aws_codepipeline" "python_codepipeline" {
 
   tags = merge(
     var.tags
-  )
+    , {
+      git_commit           = "fc2d00f1561f68d3905cfc4ef4c71f6465327645"
+      git_file             = "pipelines.tf"
+      git_last_modified_at = "2025-05-24 17:18:59"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "python_codepipeline"
+      yor_trace            = "2e47f4ee-ef02-46f9-b4d2-94ee9a0732c4"
+  })
 
   depends_on = [module.aws_fastapi_lambda_api_gateway_ecr, module.codepipeline_artifact_store, module.codepipeline_iam_role, aws_codepipeline.cloudformation_template_codepipeline]
 }
@@ -245,5 +255,15 @@ resource "aws_codepipeline" "cloudformation_template_codepipeline" {
 
   tags = merge(
     var.tags
-  )
+    , {
+      git_commit           = "c89746b2d3738da6592cb317c52ca8bd7540609e"
+      git_file             = "pipelines.tf"
+      git_last_modified_at = "2025-07-09 21:21:36"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "cloudformation_template_codepipeline"
+      yor_trace            = "ce251725-5f9b-4e9b-8abf-3fc49f008306"
+  })
 }

@@ -24,7 +24,17 @@ resource "aws_codestarconnections_connection" "github_kwame_mintah" {
     {
       "Repository" = "https://github.com/kwame-mintah"
     }
-  )
+    , {
+      git_commit           = "83705d064a904fe32af4dc97b8c15922fcc3c167"
+      git_file             = "main.tf"
+      git_last_modified_at = "2025-04-26 12:31:25"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "github_kwame_mintah"
+      yor_trace            = "d0daabff-b8ac-448e-8abf-9394e0b08151"
+  })
 }
 
 module "codebuild_python_pytest" {
@@ -41,7 +51,17 @@ module "codebuild_python_pytest" {
 
   tags = merge(
     var.tags
-  )
+    , {
+      git_commit           = "c90adf1e45167135e198bf525c313a5c49cd8aa8"
+      git_file             = "main.tf"
+      git_last_modified_at = "2025-04-29 20:23:46"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codebuild_python_pytest"
+      yor_trace            = "173b2a35-d4e9-4f49-a872-d6e037010e68"
+  })
 }
 
 module "codepipeline_iam_role" {
@@ -53,7 +73,17 @@ module "codepipeline_iam_role" {
 
   tags = merge(
     var.tags
-  )
+    , {
+      git_commit           = "a1f01319e189b202496f5133d42ed96c18c4ed44"
+      git_file             = "main.tf"
+      git_last_modified_at = "2025-05-24 17:02:05"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codepipeline_iam_role"
+      yor_trace            = "58a8de86-53d4-4cf1-9bdc-3c7dd774cd3d"
+  })
 }
 
 module "codepipeline_artifact_store" {
@@ -63,5 +93,15 @@ module "codepipeline_artifact_store" {
 
   tags = merge(
     var.tags
-  )
+    , {
+      git_commit           = "0fd2d507189db5a065826f3cfe3fb14d0b49a341"
+      git_file             = "main.tf"
+      git_last_modified_at = "2025-04-26 15:32:56"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codepipeline_artifact_store"
+      yor_trace            = "b475483a-1018-48ad-83b7-3de7b01f9a9a"
+  })
 }

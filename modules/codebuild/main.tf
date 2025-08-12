@@ -41,7 +41,17 @@ resource "aws_codebuild_project" "codebuild_project" {
 
   tags = merge(
     local.common_tags,
-  )
+    {
+      git_commit           = "64bb78b2e54b43e194e06237b25aec428eb328bf"
+      git_file             = "modules/codebuild/main.tf"
+      git_last_modified_at = "2025-04-27 18:07:49"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codebuild_project"
+      yor_trace            = "72c20b27-d920-4d59-948d-d117fc0e390e"
+  })
 }
 
 #---------------------------------------------------
@@ -69,7 +79,17 @@ resource "aws_codebuild_report_group" "codebuild_test_report_group" {
 
   tags = merge(
     local.common_tags,
-  )
+    {
+      git_commit           = "78e61acb41eaf7ee24c8f872d85815c0d0a5f4f0"
+      git_file             = "modules/codebuild/main.tf"
+      git_last_modified_at = "2025-04-27 20:23:32"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codebuild_test_report_group"
+      yor_trace            = "631474f6-27ef-4113-bf68-1a133f3f1e1f"
+  })
 }
 
 #---------------------------------------------------
@@ -83,7 +103,17 @@ resource "aws_kms_key" "kms" {
 
   tags = merge(
     local.common_tags
-  )
+    , {
+      git_commit           = "64bb78b2e54b43e194e06237b25aec428eb328bf"
+      git_file             = "modules/codebuild/main.tf"
+      git_last_modified_at = "2025-04-27 18:07:49"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "kms"
+      yor_trace            = "83ea292d-1999-40db-95f2-b48869a185eb"
+  })
 }
 
 resource "aws_kms_alias" "kms_alias" {

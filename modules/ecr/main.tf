@@ -28,7 +28,17 @@ resource "aws_ecr_repository" "repository" {
 
   tags = merge(
     local.common_tags
-  )
+    , {
+      git_commit           = "b9017037e8c98ea5c10decac915560719cfc9431"
+      git_file             = "modules/ecr/main.tf"
+      git_last_modified_at = "2025-04-26 12:25:33"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "repository"
+      yor_trace            = "838019fe-a7c4-4c7e-acf1-d2e9b6fd3167"
+  })
 }
 
 #---------------------------------------------------
@@ -41,7 +51,17 @@ resource "aws_kms_key" "kms" {
 
   tags = merge(
     local.common_tags
-  )
+    , {
+      git_commit           = "b9017037e8c98ea5c10decac915560719cfc9431"
+      git_file             = "modules/ecr/main.tf"
+      git_last_modified_at = "2025-04-26 12:25:33"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "kms"
+      yor_trace            = "557fb67c-7d04-4779-bd4a-cfd3df18897a"
+  })
 }
 
 resource "aws_kms_alias" "kms_alias" {

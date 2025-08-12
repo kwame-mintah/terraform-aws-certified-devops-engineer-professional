@@ -20,7 +20,17 @@ resource "aws_cloudformation_stack" "dynamodb_table_stack" {
 
   tags = merge(
     var.tags
-  )
+    , {
+      git_commit           = "a41e271d4cd1ad02a33a66c047b4241304cf0e69"
+      git_file             = "cloudformation.tf"
+      git_last_modified_at = "2025-04-30 21:19:26"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "dynamodb_table_stack"
+      yor_trace            = "61ad9e64-d68c-4b31-a2ce-5d48ca47f1c8"
+  })
 }
 
 
@@ -53,7 +63,17 @@ resource "aws_iam_role" "cloudformation_provider_role" {
 
   tags = merge(
     var.tags
-  )
+    , {
+      git_commit           = "9c48a7c10d3c3e5f69e46b5043fd6fb4650c0fa5"
+      git_file             = "cloudformation.tf"
+      git_last_modified_at = "2025-05-24 16:57:16"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "cloudformation_provider_role"
+      yor_trace            = "cdccbf14-ef41-4b4b-9820-7fb51aef8f00"
+  })
 }
 
 # Create inline policies for the role

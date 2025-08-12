@@ -25,7 +25,17 @@ resource "aws_iam_role" "codepipeline_role" {
 
   tags = merge(
     local.common_tags
-  )
+    , {
+      git_commit           = "e27d8a078ac7568de6891d0c076815511d2515a2"
+      git_file             = "modules/codepipeline-iam-role/main.tf"
+      git_last_modified_at = "2025-04-26 12:28:22"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codepipeline_role"
+      yor_trace            = "2aa93091-1b6b-4791-96a0-e7e930c71715"
+  })
 }
 
 #---------------------------------------------------
@@ -67,7 +77,17 @@ resource "aws_iam_policy" "codepipeline_iam_policies" {
 
   tags = merge(
     local.common_tags,
-  )
+    {
+      git_commit           = "b1569aa56b3411583497f4301842fb2647586e66"
+      git_file             = "modules/codepipeline-iam-role/main.tf"
+      git_last_modified_at = "2025-04-26 15:29:21"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codepipeline_iam_policies"
+      yor_trace            = "0b037daf-1305-4106-bca8-ab908f5bd678"
+  })
 }
 
 resource "aws_iam_policy" "codepipeline_allow_ecr" {
@@ -77,7 +97,17 @@ resource "aws_iam_policy" "codepipeline_allow_ecr" {
 
   tags = merge(
     local.common_tags,
-  )
+    {
+      git_commit           = "b1569aa56b3411583497f4301842fb2647586e66"
+      git_file             = "modules/codepipeline-iam-role/main.tf"
+      git_last_modified_at = "2025-04-26 15:29:21"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codepipeline_allow_ecr"
+      yor_trace            = "36e8a335-547f-41b1-ac80-4233865d612e"
+  })
 }
 
 resource "aws_iam_policy" "codepipeline_allow_s3" {
@@ -87,7 +117,17 @@ resource "aws_iam_policy" "codepipeline_allow_s3" {
 
   tags = merge(
     local.common_tags,
-  )
+    {
+      git_commit           = "b1569aa56b3411583497f4301842fb2647586e66"
+      git_file             = "modules/codepipeline-iam-role/main.tf"
+      git_last_modified_at = "2025-04-26 15:29:21"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codepipeline_allow_s3"
+      yor_trace            = "9a3337ff-b626-44ca-9498-4809ff73c468"
+  })
 }
 
 resource "aws_iam_policy" "codepipeline_allow_cloudformation_pass_iam_role" {
@@ -97,7 +137,17 @@ resource "aws_iam_policy" "codepipeline_allow_cloudformation_pass_iam_role" {
 
   tags = merge(
     local.common_tags,
-  )
+    {
+      git_commit           = "c4a3a72eed684186deb3f2baae3732ac5c2c5ed1"
+      git_file             = "modules/codepipeline-iam-role/main.tf"
+      git_last_modified_at = "2025-05-24 16:59:29"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "codepipeline_allow_cloudformation_pass_iam_role"
+      yor_trace            = "dc41120b-cbf4-4d70-a865-7a946730219d"
+  })
 }
 
 #---------------------------------------------------

@@ -27,7 +27,17 @@ resource "aws_s3_bucket" "s3_bucket" {
 
   tags = merge(
     local.common_tags
-  )
+    , {
+      git_commit           = "e52e8053479152967ad014e6382a688336c4e0af"
+      git_file             = "modules/s3/main.tf"
+      git_last_modified_at = "2025-04-26 15:27:43"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "s3_bucket"
+      yor_trace            = "8d4cb523-88bb-44b1-ba9f-78864944106d"
+  })
 }
 
 resource "aws_s3_bucket_ownership_controls" "s3_bucket_acl_ownership" {
@@ -80,7 +90,17 @@ resource "aws_s3_bucket" "logging_bucket" {
 
   tags = merge(
     local.common_tags
-  )
+    , {
+      git_commit           = "e52e8053479152967ad014e6382a688336c4e0af"
+      git_file             = "modules/s3/main.tf"
+      git_last_modified_at = "2025-04-26 15:27:43"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "logging_bucket"
+      yor_trace            = "4bdb3e58-b660-469e-8c15-a115b3e6c50a"
+  })
 }
 
 resource "aws_s3_bucket_ownership_controls" "logging_bucket_acl_ownership" {
@@ -156,7 +176,17 @@ resource "aws_kms_key" "kms" {
 
   tags = merge(
     local.common_tags
-  )
+    , {
+      git_commit           = "e52e8053479152967ad014e6382a688336c4e0af"
+      git_file             = "modules/s3/main.tf"
+      git_last_modified_at = "2025-04-26 15:27:43"
+      git_last_modified_by = "kwame_mintah@hotmail.co.uk"
+      git_modifiers        = "kwame_mintah"
+      git_org              = "kwame-mintah"
+      git_repo             = "terraform-aws-certified-devops-engineer-professional"
+      yor_name             = "kms"
+      yor_trace            = "ba784bb2-297b-48f8-b036-9cb32b5b0818"
+  })
 }
 
 resource "aws_kms_alias" "kms_alias" {
