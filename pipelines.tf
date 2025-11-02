@@ -254,8 +254,8 @@ resource "aws_codepipeline" "cloudformation_template_codepipeline" {
   }
 
   tags = merge(
-    var.tags
-    , {
+    var.tags,
+    {
       git_commit           = "c89746b2d3738da6592cb317c52ca8bd7540609e"
       git_file             = "pipelines.tf"
       git_last_modified_at = "2025-07-09 21:21:36"
