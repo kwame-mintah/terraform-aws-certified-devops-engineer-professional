@@ -77,8 +77,11 @@ and [project status](https://github.com/opentofu/opentofu/blob/main/WEEKLY_UPDAT
 Due to mixture of using both Terraform and CloudFormation for learning purposes, not all resources will be destroyed when attempting
 to  use Terraform destroy. Please follow the order below before attempting a `terragrunt destroy`.
 
-1. Delete the CloudFormation stack for (`devops-engineer-lambda-api-gateway-stack`),
-2. Empty S3 Bucket(s).
+1. Delete stack 'devops-engineer-lambda-api-gateway-stack' in AWS CloudFormation,
+2. Empty [AWS S3 Buckets](https://gist.github.com/kwame-mintah/45d28e9768776075f4e7d57bff5f5eed) created by Terraform (e.g.devops-engineer-eu-west-2-dev-codepipeline-store-logging-*, devops-engineer-eu-west-2-dev-codepipeline-store-*),
+3. Empty ECR Docker images,
+4. Delete CloudBuild report group(s) (e.g. devops-engineer-eu-west-2-dev-pytest-codebuild-pytest_reports),
+5. Finally run `terragrunt destroy`.
 
 ## Pre-Commit hooks
 
